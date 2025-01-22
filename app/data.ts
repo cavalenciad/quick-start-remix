@@ -10,6 +10,7 @@ import invariant from "tiny-invariant";
 type ContactMutation = {
   id?: string;
   name?: string;
+  adjective?: string;
   scientific_name?: string;
   avatar?: string;
   description?: string;
