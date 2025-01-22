@@ -26,7 +26,7 @@ export default function Contact() {
         <div id="contact">
             <div>
                 <img
-                    alt={`${contact.name} ${contact.scientific_name} avatar`}
+                    alt={`${contact.name} ${contact.adjective} ${contact.scientific_name} avatar`}
                     key={contact.avatar}
                     src={contact.avatar}
                 />
@@ -34,9 +34,9 @@ export default function Contact() {
 
             <div>
                 <h1>
-                    {contact.name || contact.scientific_name ? (
+                    {contact.name || contact.adjective ? (
                         <>                            
-                            {contact.name}
+                            {contact.name} {contact.adjective}
                         </>
                     ) : (
                         <i>No Name</i>
@@ -44,7 +44,7 @@ export default function Contact() {
                     <Favorite contact={contact} />
                 </h1>
                 <h2>
-                    {contact.name || contact.scientific_name ? (
+                    {contact.scientific_name ? (
                         <>                            
                             ({contact?.scientific_name})
                         </>

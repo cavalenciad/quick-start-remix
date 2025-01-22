@@ -58,7 +58,7 @@ export default function App() {
                     <Link to={`contacts/${contact.id}`}>
                       {contact.name || contact.scientific_name ? (
                         <>
-                          {contact.name}
+                          {contact.name} {contact.adjective}
                         </>
                       ) : (
                         <i>No Name</i>
