@@ -1,50 +1,52 @@
 import { json } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 import type { FunctionComponent } from "react";
+import type { LoaderFunctionArgs } from "@remix-run/node";
+import invariant from "tiny-invariant";
 
 import type { ContactRecord } from "../data";
 
 import { getContact } from "../data";
 
-export const loader = async ({ params }) => {
+export const loader = async ({ 
+    params, 
+}: LoaderFunctionArgs) => {
+    invariant(params.contactId, "Missing contactId parameter");
     const contact = await getContact(params.contactId);
+    if(!contact) {
+        throw new Response("Contact not found", { status: 404 });
+    }
     return json({ contact });
-  };
+};
 
 export default function Contact() {
     const { contact } = useLoaderData<typeof loader>();
-/*     const contact = {
-        first: "Your",
-        last: "Name",
-        avatar: "https://placecats.com/200/200",
-        twitter: "your_handle",
-        notes: "Some notes",
-        favorite: true,
-    }; */
 
     return (
         <div id="contact">
             <div>
-                <img
-                    alt={`${contact.name} ${contact.adjective} ${contact.scientific_name} avatar`}
-                    key={contact.avatar}
-                    src={contact.avatar}
-                />
+                {contact && (
+                    <img
+                        alt={`${contact.name} ${contact.adjective} ${contact.scientific_name} avatar`}
+                        key={contact.avatar}
+                        src={contact.avatar}
+                    />
+                )}
             </div>
 
             <div>
                 <h1>
-                    {contact.name || contact.adjective ? (
+                    {contact && (contact.name || contact.adjective) ? (
                         <>                            
                             {contact.name} {contact.adjective}
                         </>
                     ) : (
                         <i>No Name</i>
                     )}{" "}
-                    <Favorite contact={contact} />
+                    {contact && <Favorite contact={contact} />}
                 </h1>
                 <h2>
-                    {contact.scientific_name ? (
+                    {contact && contact.scientific_name ? (
                         <>                            
                             ({contact?.scientific_name})
                         </>
@@ -53,13 +55,13 @@ export default function Contact() {
                     )}
                 </h2>
 
-                {contact.description ? (
+                {contact && contact.description ? (
                     <p>
-                        {contact?.description}
+                        {contact.description}
                     </p>
                 ) : null}
 
-                {contact.notes ? <p>{contact.notes}</p> : null}
+                {contact && contact.notes ? <p>{contact.notes}</p> : null}
 
                 <div>
                     <Form action="edit">
