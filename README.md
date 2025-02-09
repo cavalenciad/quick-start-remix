@@ -18,6 +18,8 @@ npm run dev
 ```
 Cuando estés visualizando el proyecto en el navegador (por lo general en el enlace: http://localhost:5174/), se podrá ver una lista de aves en el panel de navegación. Al darle click a cada nombre, obtendrás más información acerca de cada una de estas aves. 
 
+También podrás ingresar nuevas aves al darle click al botón "New", ingresando los datos solicitados. Además, puedes editar o eliminar las aves que desees, con los botones correspondientes: "Edit", "Delete", puedes incluso buscar alguna ave en particular en la barra "Search" o seleccionar tus aves favoritas en el ícono en forma de estrella al lado del nombre.
+
 ## Conceptos claves
 
 ### Links:
@@ -34,3 +36,18 @@ Las rutas anidadas son aquellas que permiten establecer esquemas jerárquicos a 
 
 ### Componente Outlet:
 El componente Outlet permite renderizar un componente hijo en la parte correspondiente (donde se haya puesto la etiqueta Outlet) en el padre. Esto lo hace cuando se la ruta hija hace match con la indicada en el padre. Es un comportamiento muy conveniente, pues no es necesario renderizar el resto de la página para sólo cambiar una parte de esta. 
+
+### Action
+El Action se utiliza para manejar solicitudes POST, PUT y DELETE. Es similar a la función loader, pero en lugar de obtener datos para renderizar una página, se utiliza para manejar la lógica del lado del servidor cuando se envía un formulario o se realiza una acción que modifica datos.
+
+###Loader
+El loader es una función que se utiliza para cargar datos del lado del servidor antes de que se renderice una ruta. La función loader se ejecuta en el servidor y permite obtener datos necesarios para la página, como información de una base de datos, una API, o cualquier otra fuente de datos. Estos datos se pasan al componente de la ruta a través del hook useLoaderData.
+
+###useLoaderData
+El useLoaderData es un hook que se utiliza para acceder a los datos que han sido cargados por la función loader de una ruta. Este hook permite que los componentes de React obtengan los datos que fueron pre-cargados en el servidor antes de que la página se renderice en el cliente.
+
+###useActionData
+El hook useActionData se utiliza para acceder a los datos que han sido devueltos por la función action de una ruta. Este hook permite que los componentes de React obtengan los datos que fueron procesados y devueltos por la función action después de que se haya enviado un formulario o se haya realizado una acción que modifica datos.
+
+###Invariant
+invariant es una función de utilidad que se utiliza para verificar condiciones y lanzar errores si esas condiciones no se cumplen. Es una forma de asegurar que ciertas condiciones sean verdaderas antes de continuar con la ejecución del código. Si la condición no se cumple, invariant lanzará un error con un mensaje específico.
